@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A1388C302CEA51D0006CD617 /* StandUpDebugMac in Frameworks */ = {isa = PBXBuildFile; productRef = A1388C2F2CEA51D0006CD617 /* StandUpDebugMac */; };
+		A1388CAF2CEC77D9006CD617 /* StandUpMac in Frameworks */ = {isa = PBXBuildFile; productRef = A1388CAE2CEC77D9006CD617 /* StandUpMac */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +38,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
-				Package/StandUpDebug,
 			);
 			target = A120FFC52CEA412700280161 /* StandUp */;
 		};
@@ -70,7 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1388C302CEA51D0006CD617 /* StandUpDebugMac in Frameworks */,
+				A1388CAF2CEC77D9006CD617 /* StandUpMac in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,7 +138,7 @@
 			);
 			name = StandUp;
 			packageProductDependencies = (
-				A1388C2F2CEA51D0006CD617 /* StandUpDebugMac */,
+				A1388CAE2CEC77D9006CD617 /* StandUpMac */,
 			);
 			productName = StandUp;
 			productReference = A120FFC62CEA412700280161 /* StandUp.app */;
@@ -625,9 +624,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A1388C2F2CEA51D0006CD617 /* StandUpDebugMac */ = {
+		A1388CAE2CEC77D9006CD617 /* StandUpMac */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = StandUpDebugMac;
+			productName = StandUpMac;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

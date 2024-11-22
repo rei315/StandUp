@@ -4,26 +4,24 @@
 import PackageDescription
 
 let package = Package(
-  name: "StandUpDebug",
+  name: "StandUp",
   platforms: [
     .iOS(.v17),
     .macOS(.v14)
   ],
   products: [
     .library(
-      name: "StandUpDebugMac",
-      targets: ["StandUpDebugMac"]
+      name: "StandUpMac",
+      targets: ["StandUpMac"]
     ),
   ],
   targets: [
     .target(
-      name: "StandUpDebugMac",
+      name: "StandUpMac",
       dependencies: [
-        "Popover"
+        "Shared"
       ]
     ),
-    .target(
-      name: "Popover"
-    )
+    .target(name: "Shared")
   ]
 )

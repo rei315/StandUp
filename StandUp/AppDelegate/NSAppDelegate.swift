@@ -10,33 +10,13 @@ import AppKit
 import Foundation
 import SwiftUI
 
-#if DEBUG
-import StandUpDebugMac
-#else
-import StandUpDebugMac
-#endif
-
-
 final class NSAppDelegate: NSObject, NSApplicationDelegate {
-  private var statusItem: NSStatusItem?
-  private var popover: NSPopover?
-  
-#if DEBUG
-  var app: StandUpDebugMac!
-#else
-  var app: StandUpDebugMac!
-#endif
-  
   func applicationWillFinishLaunching(_ notification: Notification) {
     
   }
   
   func applicationDidFinishLaunching(_ notification: Notification) {
-    NSApp.windows.forEach { $0.close() }
-    NSApp.setActivationPolicy(.accessory)
     
-    app = .init()
-    app.setupStatusBar()
   }
   
   func applicationWillHide(_ notification: Notification) {
