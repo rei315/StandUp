@@ -6,7 +6,7 @@
 // Copyright © 2024 rei315. All rights reserved.
 //
 
-
+import Shared
 import SwiftUI
 
 extension StandUpView {
@@ -17,9 +17,7 @@ extension StandUpView {
       VStack {
         HStack {
           BackButton {
-            withAnimation {
-              viewState = .top
-            }
+            viewState = .top(source: .pop)
           }
           Spacer()
         }

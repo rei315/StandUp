@@ -6,6 +6,7 @@
 // Copyright © 2024 rei315. All rights reserved.
 //
 
+import Shared
 import SwiftUI
 
 public struct StandUpView: View {
@@ -19,14 +20,14 @@ public struct StandUpView: View {
   }
   
   public var body: some View {
-    VStack {
+    Group {
       switch viewData.viewState {
-      case .top:
+      case let .top(source):
         TopView(viewState: $viewData.viewState)
-          .transition(.opacity)
-      case .editSchedule:
+          .transitionBy(source: source)
+      case let .editSchedule(source):
         EditScheduleView(viewState: $viewData.viewState)
-          .transition(.opacity)
+          .transitionBy(source: source)
       case .profiles:
         EmptyView()
       case .settings:
@@ -34,6 +35,6 @@ public struct StandUpView: View {
       }
     }
     .frame(width: 400)
-    .frame(maxHeight: 400)
+    .frame(idealHeight: 400)
   }
 }

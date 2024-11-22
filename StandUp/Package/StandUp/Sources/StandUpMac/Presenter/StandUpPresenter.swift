@@ -6,10 +6,11 @@
 // Copyright © 2024 rei315. All rights reserved.
 //
 
+import Shared
 import SwiftUI
 
 final class StandUpViewData: ObservableObject {
-  @Published var viewState: ViewStateDestinations = .top
+  @Published var viewState: ViewStateDestinations = .top(source: .initial)
 }
 
 @MainActor

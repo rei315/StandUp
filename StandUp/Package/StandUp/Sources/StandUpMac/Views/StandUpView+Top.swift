@@ -6,7 +6,7 @@
 // Copyright © 2024 rei315. All rights reserved.
 //
 
-
+import Shared
 import SwiftUI
 
 extension StandUpView {
@@ -67,7 +67,7 @@ extension StandUpView {
           HStack {
             Button {
               withAnimation {
-                viewState = .editSchedule
+                viewState = .editSchedule(source: .push)
               }
             } label: {
               Text("...")
@@ -80,7 +80,7 @@ extension StandUpView {
           HStack {
             Button {
               withAnimation {
-                viewState = .editSchedule
+                viewState = .editSchedule(source: .push)
               }
             } label: {
               Text("...")

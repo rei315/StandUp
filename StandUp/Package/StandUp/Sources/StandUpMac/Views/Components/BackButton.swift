@@ -15,7 +15,9 @@ struct BackButton: View {
   
   var body: some View {
     Button {
-      action()
+      withAnimation {
+        action()
+      }
     } label: {
       Label {
         Text("戻る")
