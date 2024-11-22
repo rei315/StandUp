@@ -10,6 +10,7 @@ import SwiftData
 
 #if canImport(AppKit)
 import AppKit
+import StandUpMac
 #endif
 
 #if canImport(UIKit)
@@ -17,41 +18,23 @@ import UIKit
 #endif
 
 @main
-struct StandUpApp {
-  static func main() {
-    setup()
-  }
-  
-  private static func setup() {
+struct StandUpApp: App {
+  var body: some Scene {
+    
 #if canImport(AppKit)
-    setupAppKit()
+    MenuBarExtra {
+      StandUpView()
+    } label: {
+      Image(systemName: "leaf")
+    }
+    .menuBarExtraStyle(.window)
+
 #elseif canImport(UIKit)
-    setupUIKit()
+    WindowGroup {
+
+    }
 #endif
   }
-  
-#if canImport(AppKit)
-  private static func setupAppKit() {
-    let app = NSApplication.shared
-    let delegate = NSAppDelegate()
-    app.delegate = delegate
-    app.run()
-  }
-#endif
-  
-#if canImport(UIKit)
-  private static func setupUIKit() {
-    let app = UIApplication.shared
-    let delegate = UIAppDelegate()
-    app.delegate = delegate
-    _ = UIApplicationMain(
-      CommandLine.argc,
-      CommandLine.unsafeArgv,
-      nil,
-      NSStringFromClass(UIAppDelegate.self)
-    )
-  }
-#endif
 }
 
 
