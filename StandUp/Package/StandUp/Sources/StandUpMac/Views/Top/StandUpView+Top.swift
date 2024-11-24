@@ -24,8 +24,7 @@ extension StandUpView {
           contentEmptyView
         }
       }
-      .padding(.horizontal, 24)
-      .padding(.top, 24)
+      .padding(24)
     }
     
     @MainActor @ViewBuilder
@@ -46,20 +45,23 @@ extension StandUpView {
     @MainActor @ViewBuilder
     private var contentView: some View {
       ScrollView(.vertical) {
-        Button {
-          withAnimation {
-            viewState = .editSchedule(source: .push)
-          }
-        } label: {
+        VStack(spacing: 16) {
           TimeCycleCell(
-            viewState: $viewState,
             timeCycleForEvery: .hour(1),
-            timeCycleForDuring: .minute(10)
+            timeCycleForDuring: .minute(10),
+            onTapTimeCycleView: {
+              withAnimation {
+                viewState = .editSchedule(source: .push)
+              }
+            }
           )
+          
+          ExceptionTimeCycleCell(exceptionTimes: []) {
+            withAnimation {
+              viewState = .addExceptionSchedule(source: .push)
+            }
+          }
         }
-        .buttonStyle(.plain)
-
-        Spacer(minLength: 24)
       }
     }
     

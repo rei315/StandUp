@@ -11,9 +11,9 @@ import SwiftUI
 
 extension StandUpView.TopView {
   struct TimeCycleCell: View {
-    @Binding var viewState: ViewStateDestinations
     let timeCycleForEvery: NotificationTimeCycle
     let timeCycleForDuring: NotificationTimeCycle
+    let onTapTimeCycleView: () async -> Void
     
     var body: some View {
       VStack(spacing: 14) {
@@ -21,14 +21,21 @@ extension StandUpView.TopView {
           .textStyle(.semantics.labelLargeRegular)
           .foregroundStyle(Color.titleColor)
           .frame(maxWidth: .infinity, alignment: .leading)
-        HStack {
-          TimeCycleLabel(timeCycle: timeCycleForEvery, timeCycleType: .every)
-          Spacer()
-          TimeCycleLabel(timeCycle: timeCycleForDuring, timeCycleType: .during)
+        Button {
+          Task {
+            await onTapTimeCycleView()
+          }
+        } label: {
+          HStack {
+            TimeCycleLabel(timeCycle: timeCycleForEvery, timeCycleType: .every)
+            Spacer()
+            TimeCycleLabel(timeCycle: timeCycleForDuring, timeCycleType: .during)
+          }
+          .padding(12)
+          .background(Color.buttonBackgroundColor)
+          .clipShape(RoundedRectangle(cornerRadius: 8))
         }
-        .padding(12)
-        .background(Color.buttonBackgroundColor)
-        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .buttonStyle(.plain)
       }
       .padding(.init(top: 22, leading: 16, bottom: 16, trailing: 16))
       .frame(maxWidth: .infinity)

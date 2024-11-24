@@ -13,6 +13,7 @@ import SwiftUI
 public enum ViewStateDestinations {
   case top(source: TransitionSource)
   case editSchedule(source: TransitionSource)
+  case addExceptionSchedule(source: TransitionSource)
   case profiles
   case settings
 }

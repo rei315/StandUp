@@ -28,6 +28,8 @@ public struct StandUpView: View {
       case let .editSchedule(source):
         EditScheduleView(viewState: $viewData.viewState)
           .transitionBy(source: source)
+      case let .addExceptionSchedule(source):
+        EmptyView()
       case .profiles:
         EmptyView()
       case .settings:
@@ -35,7 +37,7 @@ public struct StandUpView: View {
       }
     }
     .frame(width: 400)
-    .frame(idealHeight: 400)
+    .frame(maxHeight: 400)
     .background(Color.topBackgroundColor)
   }
 }
