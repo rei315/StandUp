@@ -47,8 +47,8 @@ extension StandUpView {
       ScrollView(.vertical) {
         VStack(spacing: 16) {
           TimeCycleCell(
-            timeCycleForEvery: .hour(1),
-            timeCycleForDuring: .minute(10),
+            timeCycleForEvery: .init(),
+            timeCycleForDuring: .init(),
             onTapTimeCycleView: {
               withAnimation {
                 viewState = .editSchedule(source: .push)

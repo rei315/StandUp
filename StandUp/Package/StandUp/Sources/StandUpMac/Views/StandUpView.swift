@@ -26,10 +26,15 @@ public struct StandUpView: View {
         TopView(viewState: $viewData.viewState)
           .transitionBy(source: source)
       case let .editSchedule(source):
-        EditScheduleView(viewState: $viewData.viewState)
-          .transitionBy(source: source)
+        EditScheduleView(
+          viewState: $viewData.viewState,
+          timeCycleForEvery: $viewData.timeCycleForEvery,
+          timeCycleForDuring: $viewData.timeCycleForDuring
+        )
+        .transitionBy(source: source)
       case let .addExceptionSchedule(source):
-        EmptyView()
+        EditExceptionTimeCycle(viewState: $viewData.viewState)
+          .transitionBy(source: source)
       case .profiles:
         EmptyView()
       case .settings:

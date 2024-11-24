@@ -8,31 +8,27 @@
 
 import Foundation
 
-enum NotificationTimeCycle {
-  case day(Int)
-  case hour(Int)
-  case minute(Int)
+struct NotificationTimeCycle {
+  var value: Int
+  var type: NotificationTimeCycleType
   
-  // todo: localization
-  var description: String {
-    switch self {
-    case .day:
-      return "days"
-    case .hour:
-      return "hours"
-    case .minute:
-      return "minutes"
-    }
+  init(value: Int = 0, type: NotificationTimeCycleType = .hour) {
+    self.value = value
+    self.type = type
   }
   
-  var value: Int {
-    switch self {
-    case let .day(value):
-      return value
-    case let .hour(value):
-      return value
-    case let .minute(value):
-      return value
+  enum NotificationTimeCycleType {
+    case hour
+    case minute
+    
+    // todo: localization
+    var description: String {
+      switch self {
+      case .hour:
+        return "hours"
+      case .minute:
+        return "minutes"
+      }
     }
   }
 }

@@ -29,7 +29,10 @@ extension TextStyle {
 
 @MainActor
 public struct SemanticsTextStyle: Sendable {
+  /// 20, bold
   public var appTitle: TextStyle = .init(font: .fontStyle.appTitle)
+  /// 18, regular
+  public var screenTitle: TextStyle = .init(font: .fontStyle.screenTitle)
   /// 18, bold
   public var titleLarge: TextStyle = .init(font: .fontStyle.titleLarge)
   /// 15, bold
@@ -63,6 +66,8 @@ public struct SemanticsTextStyle: Sendable {
 public struct FontStyle: Sendable {
   /// 20, bold
   public var appTitle: Font = .system(size: 20, weight: .bold)
+  /// 18, regular
+  public var screenTitle: Font = .system(size: 18, weight: .regular)
   /// 18, bold
   public var titleLarge: Font = .system(size: 18, weight: .bold)
   /// 15, bold
