@@ -12,12 +12,12 @@ struct NotificationTimeCycle {
   var value: Int
   var type: NotificationTimeCycleType
   
-  init(value: Int = 0, type: NotificationTimeCycleType = .hour) {
+  init(value: Int, type: NotificationTimeCycleType) {
     self.value = value
     self.type = type
   }
   
-  enum NotificationTimeCycleType {
+  enum NotificationTimeCycleType: Int, CaseIterable, Identifiable {
     case hour
     case minute
     
@@ -29,6 +29,10 @@ struct NotificationTimeCycle {
       case .minute:
         return "minutes"
       }
+    }
+    
+    var id: Int {
+      self.rawValue
     }
   }
 }

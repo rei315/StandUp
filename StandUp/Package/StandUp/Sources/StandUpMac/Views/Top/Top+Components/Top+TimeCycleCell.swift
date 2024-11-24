@@ -11,8 +11,8 @@ import SwiftUI
 
 extension StandUpView.TopView {
   struct TimeCycleCell: View {
-    let timeCycleForEvery: NotificationTimeCycle
-    let timeCycleForDuring: NotificationTimeCycle
+    @Binding var timeCycleForEvery: NotificationTimeCycle
+    @Binding var timeCycleForDuring: NotificationTimeCycle
     let onTapTimeCycleView: () async -> Void
     
     var body: some View {
@@ -27,9 +27,9 @@ extension StandUpView.TopView {
           }
         } label: {
           HStack {
-            TimeCycleLabel(timeCycle: timeCycleForEvery, timeCycleType: .every)
+            TimeCycleLabel(timeCycle: $timeCycleForEvery, timeCycleType: .every)
             Spacer()
-            TimeCycleLabel(timeCycle: timeCycleForDuring, timeCycleType: .during)
+            TimeCycleLabel(timeCycle: $timeCycleForDuring, timeCycleType: .during)
           }
           .padding(12)
           .background(Color.buttonBackgroundColor)

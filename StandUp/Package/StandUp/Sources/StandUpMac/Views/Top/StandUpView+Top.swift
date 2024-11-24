@@ -13,6 +13,8 @@ extension StandUpView {
   struct TopView: View {
     @State private var isEnabled = true
     @Binding var viewState: ViewStateDestinations
+    @Binding var timeCycleForEvery: NotificationTimeCycle
+    @Binding var timeCycleForDuring: NotificationTimeCycle
     
     var body: some View {
       VStack(spacing: 24) {
@@ -47,8 +49,8 @@ extension StandUpView {
       ScrollView(.vertical) {
         VStack(spacing: 16) {
           TimeCycleCell(
-            timeCycleForEvery: .init(),
-            timeCycleForDuring: .init(),
+            timeCycleForEvery: $timeCycleForEvery,
+            timeCycleForDuring: $timeCycleForDuring,
             onTapTimeCycleView: {
               withAnimation {
                 viewState = .editSchedule(source: .push)

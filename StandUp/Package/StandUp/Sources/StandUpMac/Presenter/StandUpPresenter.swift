@@ -11,8 +11,8 @@ import SwiftUI
 
 final class StandUpViewData: ObservableObject {
   @Published var viewState: ViewStateDestinations = .top(source: .initial)
-  @Published var timeCycleForEvery: NotificationTimeCycle = .init(type: .hour)
-  @Published var timeCycleForDuring: NotificationTimeCycle = .init(type: .minute)
+  @Published var timeCycleForEvery: NotificationTimeCycle = .init(value: 1, type: .hour)
+  @Published var timeCycleForDuring: NotificationTimeCycle = .init(value: 30, type: .minute)
 }
 
 @MainActor

@@ -10,21 +10,23 @@ import Shared
 import SwiftUI
 
 public struct StandUpView: View {
-  @ObservedObject var viewData: StandUpViewData
-  private let presenter: StandUpPresenter
+  @StateObject var viewData: StandUpViewData = .init()
+//  private let presenter: StandUpPresenter
   
   public init() {
-    let viewData = StandUpViewData()
-    self.viewData = viewData
-    presenter = .init(viewData: viewData)
+//    presenter = .init(viewData: viewData)
   }
   
   public var body: some View {
     Group {
       switch viewData.viewState {
       case let .top(source):
-        TopView(viewState: $viewData.viewState)
-          .transitionBy(source: source)
+        TopView(
+          viewState: $viewData.viewState,
+          timeCycleForEvery: $viewData.timeCycleForEvery,
+          timeCycleForDuring: $viewData.timeCycleForDuring
+        )
+        .transitionBy(source: source)
       case let .editSchedule(source):
         EditScheduleView(
           viewState: $viewData.viewState,

@@ -11,7 +11,7 @@ import SwiftUI
 
 extension StandUpView.TopView {
   struct TimeCycleLabel: View {
-    let timeCycle: NotificationTimeCycle
+    @Binding var timeCycle: NotificationTimeCycle
     let timeCycleType: TimeCycleType
     
     var body: some View {

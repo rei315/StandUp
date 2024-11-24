@@ -7,36 +7,23 @@
 //
 
 import Shared
+import Combine
 import SwiftUI
 
 extension StandUpView {
   struct EditScheduleView: View {
     @State private var timeCycleForEveryPopoverViewState: Bool = false
     @State private var timeCycleForDuringPopoverViewState: Bool = false
-    @State private var selectedTimeCycleForEveryType: TimeCycleSelectionType = .hour
-    @State private var selectedTimeCycleForDuringType: TimeCycleSelectionType = .minute
-    enum TimeCycleSelectionType: CaseIterable {
-      case hour
-      case minute
-      
-      // todo: localization
-      var description: String {
-        switch self {
-        case .hour:
-          "시간"
-        case .minute:
-          "분"
-        }
-      }
-    }
     
     @Binding var viewState: ViewStateDestinations
     
     @Binding var timeCycleForEvery: NotificationTimeCycle
     @Binding var timeCycleForDuring: NotificationTimeCycle
     
-    @State private var timeCycleForEveryForEdit: NotificationTimeCycle
-    @State private var timeCycleForDuringForEdit: NotificationTimeCycle
+    @State private var timeCycleForEveryValueForEdit: Int
+    @State private var timeCycleForEveryTypeForEdit: NotificationTimeCycle.NotificationTimeCycleType
+    @State private var timeCycleForDuringValueForEdit: Int
+    @State private var timeCycleForDuringTypeForEdit: NotificationTimeCycle.NotificationTimeCycleType
     
     init(
       viewState: Binding<ViewStateDestinations>,
@@ -47,8 +34,10 @@ extension StandUpView {
       self._timeCycleForEvery = timeCycleForEvery
       self._timeCycleForDuring = timeCycleForDuring
       
-      self.timeCycleForEveryForEdit = timeCycleForEvery.wrappedValue
-      self.timeCycleForDuringForEdit = timeCycleForDuring.wrappedValue
+      self.timeCycleForEveryValueForEdit = timeCycleForEvery.wrappedValue.value
+      self.timeCycleForEveryTypeForEdit = timeCycleForEvery.wrappedValue.type
+      self.timeCycleForDuringValueForEdit = timeCycleForDuring.wrappedValue.value
+      self.timeCycleForDuringTypeForEdit = timeCycleForDuring.wrappedValue.type
     }
     
     var body: some View {
@@ -61,40 +50,45 @@ extension StandUpView {
         }
         
         header
-
+        
         VStack(spacing: 16) {
           EditScheduleCell(
             timeCycleType: .every,
-            description: "\(timeCycleForEveryForEdit.value) \(timeCycleForEveryForEdit.type.description)"
+            value: $timeCycleForEveryValueForEdit,
+            notificationTimeCycleType: $timeCycleForEveryTypeForEdit
           ) {
             timeCycleForEveryPopoverViewState.toggle()
           }
           .popover(isPresented: $timeCycleForEveryPopoverViewState) {
-            HStack(spacing: 16) {
-              TextField("", value: $timeCycleForEveryForEdit.value, formatter: NumberFormatter())
-                .frame(minWidth: 50)
-                .frame(maxWidth: 150)
-                .fixedSize(horizontal: true, vertical: false)
-              Picker("", selection: $selectedTimeCycleForEveryType) {
-                ForEach(TimeCycleSelectionType.allCases, id: \.self) { type in
-                  Text(type.description)
-                }
-              }
-              .fixedSize(horizontal: true, vertical: false)
-            }
-            .padding(16)
+            EditPopoverView(
+              value: $timeCycleForEveryValueForEdit,
+              type: $timeCycleForEveryTypeForEdit
+            )
           }
           
           EditScheduleCell(
             timeCycleType: .during,
-            description: "\(timeCycleForDuringForEdit.value) \(timeCycleForDuringForEdit.type.description)"
+            value: $timeCycleForDuringValueForEdit,
+            notificationTimeCycleType: $timeCycleForDuringTypeForEdit
           ) {
             timeCycleForDuringPopoverViewState.toggle()
           }
+          .popover(isPresented: $timeCycleForDuringPopoverViewState) {
+            EditPopoverView(
+              value: $timeCycleForDuringValueForEdit,
+              type: $timeCycleForDuringTypeForEdit
+            )
+          }
           
           SaveEditingScheduleButton {
-            timeCycleForEvery = timeCycleForEveryForEdit
-            timeCycleForDuring = timeCycleForDuringForEdit
+            timeCycleForEvery = .init(
+              value: timeCycleForEveryValueForEdit,
+              type: timeCycleForEveryTypeForEdit
+            )
+            timeCycleForDuring = .init(
+              value: timeCycleForDuringValueForEdit,
+              type: timeCycleForDuringTypeForEdit
+            )
             withAnimation {
               viewState = .top(source: .pop)
             }

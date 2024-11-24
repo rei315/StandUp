@@ -12,14 +12,17 @@ import SwiftUI
 extension StandUpView.EditScheduleView {
   struct EditScheduleCell: View {
     let timeCycleType: TimeCycleType
-    let description: String
+    @Binding var value: Int
+    @Binding var notificationTimeCycleType: NotificationTimeCycle.NotificationTimeCycleType
+    
     let tapHandler: () async -> Void
     
     var body: some View {
       HStack {
         ContentWithLocale(
           timeCycleType: timeCycleType,
-          description: description,
+          value: $value,
+          notificationTimeCycleType: $notificationTimeCycleType,
           tapHandler: tapHandler
         )
         Spacer()
@@ -29,7 +32,8 @@ extension StandUpView.EditScheduleView {
     private struct ContentWithLocale: View {
       @Environment(\.locale) var locale
       let timeCycleType: TimeCycleType
-      let description: String
+      @Binding var value: Int
+      @Binding var notificationTimeCycleType: NotificationTimeCycle.NotificationTimeCycleType
       let tapHandler: () async -> Void
       
       var body: some View {
@@ -43,9 +47,17 @@ extension StandUpView.EditScheduleView {
             Text(timeCycleType.label)
               .textStyle(.semantics.labelLargeRegular)
               .foregroundStyle(Color.descriptionLabelColor)
-            ScheduleButton(description: description, tapHandler: tapHandler)
+            ScheduleButton(
+              value: $value,
+              notificationTimeCycleType: $notificationTimeCycleType,
+              tapHandler: tapHandler
+            )
           default:
-            ScheduleButton(description: description, tapHandler: tapHandler)
+            ScheduleButton(
+              value: $value,
+              notificationTimeCycleType: $notificationTimeCycleType,
+              tapHandler: tapHandler
+            )
             Text(timeCycleType.label)
               .textStyle(.semantics.labelLargeRegular)
               .foregroundStyle(Color.descriptionLabelColor)
@@ -61,7 +73,8 @@ extension StandUpView.EditScheduleView {
     }
     
     private struct ScheduleButton: View {
-      let description: String
+      @Binding var value: Int
+      @Binding var notificationTimeCycleType: NotificationTimeCycle.NotificationTimeCycleType
       let tapHandler: () async -> Void
       
       var body: some View {
@@ -70,7 +83,7 @@ extension StandUpView.EditScheduleView {
             await tapHandler()
           }
         } label: {
-          Text(description)
+          Text("\(value) \(notificationTimeCycleType.description)")
             .textStyle(.semantics.labelLargeRegular)
             .foregroundStyle(Color.titleColor)
             .padding(.init(top: 8, leading: 12, bottom: 8, trailing: 12))
