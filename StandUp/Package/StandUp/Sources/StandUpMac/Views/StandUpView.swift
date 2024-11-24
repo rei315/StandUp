@@ -36,5 +36,6 @@ public struct StandUpView: View {
     }
     .frame(width: 400)
     .frame(idealHeight: 400)
+    .background(Color.topBackgroundColor)
   }
 }
