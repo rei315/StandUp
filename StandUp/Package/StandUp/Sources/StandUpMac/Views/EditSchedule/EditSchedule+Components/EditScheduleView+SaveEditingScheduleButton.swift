@@ -24,7 +24,7 @@ extension StandUpView.EditScheduleView {
           .foregroundStyle(Color.titleColor)
           .padding(.vertical, 10)
           .frame(maxWidth: .infinity)
-          .background(Color.saveButtonBackgroundColorColor)
+          .background(Color.saveButtonBackgroundColor)
           .clipShape(RoundedRectangle(cornerRadius: 8))
       }
       .buttonStyle(.plain)

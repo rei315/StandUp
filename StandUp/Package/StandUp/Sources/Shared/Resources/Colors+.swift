@@ -25,5 +25,11 @@ extension Color {
   /// 9CA3AF
   public static let descriptionLabelColor: Color = Color(.descriptionLabel)
   /// 22C55E
-  public static let saveButtonBackgroundColorColor: Color = Color(.saveButtonBackground)
+  public static let saveButtonBackgroundColor: Color = Color(.saveButtonBackground)
+  /// 727277
+  public static let segmentedSelectedColor: Color = Color(.segmentedSelected)
+  /// 333334
+  public static let segmentedBackgroundColor: Color = Color(.segmentedBackground)
+  /// F2F2F2
+  public static let white1: Color = Color(.white1)
 }
